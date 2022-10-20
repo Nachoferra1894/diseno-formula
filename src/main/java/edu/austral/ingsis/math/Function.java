@@ -1,3 +1,8 @@
 package edu.austral.ingsis.math;
 
-public interface Function { }
+import edu.austral.ingsis.math.visitors.Visitor;
+
+public interface Function {
+    boolean isComposite();
+    void acceptVisitor(Visitor visitor);
+}

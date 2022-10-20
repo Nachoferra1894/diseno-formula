@@ -1,0 +1,55 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+interface Function {
+    + isComposite(): Boolean
+    + acceptVisitor(visitor: Visitor)
+}
+
+class Operation {
+    - firstArg: Function
+    - secondArg: Function
+    - operator: Operator
+    + getFirstArg()
+    + getSecondArg()
+    + getOperator()
+    + isComposite(): True
+    + acceptVisitor(visitor: Visitor)
+}
+class MonoOperator {
+}
+class MonoOperation {
+    - arg: Function
+    - operator: MonoOperator
+    + getArg()
+    + isComposite(): True
+    + acceptVisitor(visitor: Visitor)
+}
+class Variable{
+    + isComposite(): False
+    + acceptVisitor(visitor: Visitor)
+}
+interface Visitor {
+    + visitOperation()
+    + visitMonoOperation()
+    + visitVariable()
+}
+class PrintVisitor implements Visitor {
+}
+class SolveOperationVisitor implements Visitor{
+}
+class VariableVisitor implements Visitor{
+}
+
+class Operator {
+
+}
+
+
+MonoOperation --> Function
+Operation --> Function
+Variable --> Function
+Operator --> Operation
+MonoOperator --> MonoOperation
+
+@enduml
