@@ -4,9 +4,9 @@ import edu.austral.ingsis.math.visitors.Visitor;
 
 public class MonoOperation implements Function{
     private final Function arg;
-    private final Operator operator;
+    private final MonoOperator operator;
 
-    public MonoOperation(Function arg, Operator operator) {
+    public MonoOperation(Function arg, MonoOperator operator) {
         this.arg = arg;
         this.operator = operator;
     }
@@ -25,7 +25,7 @@ public class MonoOperation implements Function{
         return arg;
     }
 
-    public Operator getOperator() {
+    public MonoOperator getOperator() {
         return operator;
     }
 }

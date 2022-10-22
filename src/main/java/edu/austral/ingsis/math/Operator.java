@@ -1,7 +1,15 @@
 package edu.austral.ingsis.math;
 
-public class Operator {
+public enum Operator {
+    SUM("+"),
+    SUB("-"),
+    MUL("*"),
+    DIV("/"),
+    EXP("^");
 
-    public Operator() {
+    public final String label;
+
+    private Operator(String label) {
+        this.label = label;
     }
 }

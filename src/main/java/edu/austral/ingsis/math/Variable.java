@@ -19,7 +19,6 @@ public class Variable implements Function {
         this.value = null;
     }
 
-
     @Override
     public boolean isComposite() {
         return false;
@@ -30,7 +29,7 @@ public class Variable implements Function {
         visitor.visitVariable(this);
     }
 
-    public double getValue() {
+    public Double getValue() {
         return value;
     }
 
