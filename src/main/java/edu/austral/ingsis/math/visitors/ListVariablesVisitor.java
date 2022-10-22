@@ -8,7 +8,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class ListVariablesVisitor implements Visitor {
-    List<Variable> variables = new LinkedList<>();
+    List<String> variables = new LinkedList<>();
 
     @Override
     public void visitOperation(Operation operation) {
@@ -18,11 +18,15 @@ public class ListVariablesVisitor implements Visitor {
 
     @Override
     public void visitVariable(Variable variable) {
-        if (variable.getName() != null) variables.add(variable);
+        if (variable.getName() != null) variables.add(variable.getName());
     }
 
     @Override
     public void visitMonoOperation(MonoOperation monoOp) {
         monoOp.getArg().acceptVisitor(this);
+    }
+
+    public List<String> getVariables() {
+        return variables;
     }
 }

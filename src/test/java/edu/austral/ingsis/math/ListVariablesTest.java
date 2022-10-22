@@ -1,5 +1,7 @@
 package edu.austral.ingsis.math;
 
+import edu.austral.ingsis.math.visitors.ListVariablesVisitor;
+import edu.austral.ingsis.math.visitors.Visitor;
 import org.junit.Test;
 
 import java.util.Collections;
@@ -17,7 +19,12 @@ public class ListVariablesTest {
      */
     @Test
     public void shouldListVariablesFunction1() {
-        final List<String> result = Collections.emptyList();
+        Function op = new Operation(new Variable(1), new Variable(6), Operator.SUM);
+
+        ListVariablesVisitor variableVisitor = new ListVariablesVisitor();
+        op.acceptVisitor(variableVisitor);
+
+        final List<String> result = variableVisitor.getVariables();
 
         assertThat(result, empty());
     }
@@ -27,7 +34,12 @@ public class ListVariablesTest {
      */
     @Test
     public void shouldListVariablesFunction2() {
-        final List<String> result = Collections.emptyList();
+        Function op = new Operation(new Variable(12), new Variable("div"), Operator.DIV);
+
+        ListVariablesVisitor variableVisitor = new ListVariablesVisitor();
+        op.acceptVisitor(variableVisitor);
+
+        final List<String> result = variableVisitor.getVariables();
 
         assertThat(result, containsInAnyOrder("div"));
     }
@@ -37,7 +49,13 @@ public class ListVariablesTest {
      */
     @Test
     public void shouldListVariablesFunction3() {
-        final List<String> result = Collections.emptyList();
+        Function firstTerm = new Operation(new Variable(9), new Variable("x"), Operator.DIV);
+        Function op = new Operation(firstTerm,new Variable("y"),Operator.MUL);
+
+        ListVariablesVisitor variableVisitor = new ListVariablesVisitor();
+        op.acceptVisitor(variableVisitor);
+
+        final List<String> result = variableVisitor.getVariables();
 
         assertThat(result, containsInAnyOrder("x", "y"));
     }
@@ -47,7 +65,13 @@ public class ListVariablesTest {
      */
     @Test
     public void shouldListVariablesFunction4() {
-        final List<String> result = Collections.emptyList();
+        Function firstTerm = new Operation(new Variable(27), new Variable("a"), Operator.DIV);
+        Function op = new Operation(firstTerm,new Variable("b"),Operator.EXP);
+
+        ListVariablesVisitor variableVisitor = new ListVariablesVisitor();
+        op.acceptVisitor(variableVisitor);
+
+        final List<String> result = variableVisitor.getVariables();
 
         assertThat(result, containsInAnyOrder("a", "b"));
     }
@@ -57,7 +81,13 @@ public class ListVariablesTest {
      */
     @Test
     public void shouldListVariablesFunction5() {
-        final List<String> result = Collections.emptyList();
+        Function secondTerm = new Operation(new Variable(1), new Variable(1), Operator.DIV);
+        Function op = new Operation(new Variable("z"),secondTerm,Operator.EXP);
+
+        ListVariablesVisitor variableVisitor = new ListVariablesVisitor();
+        op.acceptVisitor(variableVisitor);
+
+        final List<String> result = variableVisitor.getVariables();
 
         assertThat(result, containsInAnyOrder("z"));
     }
@@ -67,17 +97,13 @@ public class ListVariablesTest {
      */
     @Test
     public void shouldListVariablesFunction6() {
-        final List<String> result = Collections.emptyList();
+        Function firstTerm = new MonoOperation(new Variable("value"),MonoOperator.ABS);
+        Function op = new Operation(firstTerm,new Variable(8),Operator.SUB);
 
-        assertThat(result, containsInAnyOrder("value"));
-    }
+        ListVariablesVisitor variableVisitor = new ListVariablesVisitor();
+        op.acceptVisitor(variableVisitor);
 
-    /**
-     * Case |value| - 8
-     */
-    @Test
-    public void shouldListVariablesFunction7() {
-        final List<String> result = Collections.emptyList();
+        final List<String> result = variableVisitor.getVariables();
 
         assertThat(result, containsInAnyOrder("value"));
     }
@@ -87,7 +113,13 @@ public class ListVariablesTest {
      */
     @Test
     public void shouldListVariablesFunction8() {
-        final List<String> result = Collections.emptyList();
+        Function firstTerm = new Operation(new Variable(5), new Variable("i"), Operator.SUB);
+        Function op = new Operation(firstTerm,new Variable(8),Operator.MUL);
+
+        ListVariablesVisitor variableVisitor = new ListVariablesVisitor();
+        op.acceptVisitor(variableVisitor);
+
+        final List<String> result = variableVisitor.getVariables();
 
         assertThat(result, containsInAnyOrder("i"));
     }
