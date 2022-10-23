@@ -81,7 +81,7 @@ public class ListVariablesTest {
      */
     @Test
     public void shouldListVariablesFunction5() {
-        Function secondTerm = new Operation(new Variable(1), new Variable(1), Operator.DIV);
+        Function secondTerm = new Operation(new Variable(1), new Variable(2), Operator.DIV);
         Function op = new Operation(new Variable("z"),secondTerm,Operator.EXP);
 
         ListVariablesVisitor variableVisitor = new ListVariablesVisitor();

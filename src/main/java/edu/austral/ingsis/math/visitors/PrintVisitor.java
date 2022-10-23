@@ -6,7 +6,7 @@ public class PrintVisitor implements Visitor{
     String result;
     @Override
     public void visitOperation(Operation operation) {
-        Operator monoOperator = operation.getOperator();
+        Operator operator = operation.getOperator();
         Function fstArg = operation.getFirstArg();
         Function sndArg = operation.getSecondArg();
 
@@ -14,11 +14,11 @@ public class PrintVisitor implements Visitor{
             result = "(" + getString(fstArg) + ")";
         } else result = getString(fstArg);
 
-        result += monoOperator;
+        result += " " + operator.label + " ";
 
         if (sndArg.isComposite()){
             result += "(" + getString(sndArg) + ")";
-        } else result = getString(sndArg);
+        } else result += getString(sndArg);
     }
 
     @Override
@@ -27,7 +27,7 @@ public class PrintVisitor implements Visitor{
         String name = variable.getName();
 
         if (value != null){
-            result = String.valueOf(value);
+            result = String.valueOf(Math.round(value));
         } else result = name;
     }
 
@@ -38,9 +38,11 @@ public class PrintVisitor implements Visitor{
 
         switch (monoOperator) {
             case ABS:
-                result = monoOperator + argString + monoOperator;
+                result = monoOperator.label + argString + monoOperator.label;
+                break;
             case SQR:
-                result = monoOperator + "(" + argString + ")";
+                result = monoOperator.label + "(" + argString + ")";
+                break;
             default:
                 throw new UnsupportedOperationException("The operator is not correct!");
         }
@@ -49,5 +51,9 @@ public class PrintVisitor implements Visitor{
     private String getString(Function function) {
         function.acceptVisitor(this);
         return this.result;
+    }
+
+    public String getResult() {
+        return result;
     }
 }

@@ -4,7 +4,7 @@ import edu.austral.ingsis.math.*;
 
 public class SolveVisitor implements Visitor{
     Double result;
-    EquationResolver equationResolver;
+    EquationResolver equationResolver = new EquationResolver();
 
     @Override
     public void visitOperation(Operation operation) {
@@ -30,5 +30,9 @@ public class SolveVisitor implements Visitor{
         MonoOperator operator = monoOp.getOperator();
         double arg = getResult(monoOp.getArg());
         result = equationResolver.getMonoResultFromOperator(arg,operator);
+    }
+
+    public Double getResult() {
+        return result;
     }
 }
