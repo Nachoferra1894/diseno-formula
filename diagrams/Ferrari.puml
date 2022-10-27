@@ -41,7 +41,11 @@ class SolveOperationVisitor implements Visitor{
 class VariableVisitor implements Visitor{
 }
 
-class Operator {
+enum Operator {
+
+}
+
+enum MonoOperator {
 
 }
 
